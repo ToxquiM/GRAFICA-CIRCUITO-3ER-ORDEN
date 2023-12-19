@@ -1,0 +1,25 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import signal
+
+# Definición de los componentes del circuito RLC
+R = 100  # Resistencia en ohmios
+L = 0.1  # Inductancia en henrios
+C = 1e-6  # Capacitancia en faradios
+
+# Crear un sistema RLC de tercer orden
+numerator = [1]
+denominator = [L * C, R * C, 1]
+system = signal.TransferFunction(numerator, denominator)
+
+# Generar la respuesta transitoria del sistema a una entrada delta de Dirac
+t, y = signal.impulse(system)
+
+# Graficar la respuesta transitoria
+plt.figure(figsize=(8, 6))
+plt.plot(t, y)
+plt.title('Respuesta Transitoria de un Circuito RLC de Tercer Orden')
+plt.xlabel('Tiempo')
+plt.ylabel('Respuesta')
+plt.grid(True)
+plt.show()
